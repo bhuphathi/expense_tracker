@@ -1,3 +1,4 @@
+import 'package:expense_tracker/model/expense.dart';
 import 'package:flutter/material.dart';
 
 class AddExpenses extends StatefulWidget {
@@ -10,6 +11,19 @@ class AddExpenses extends StatefulWidget {
 class _AddExpenses extends State<AddExpenses> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
+  DateTime? _selectedDate;
+
+  _datePicker() async {
+    final now = DateTime.now();
+    final selectedDate = await showDatePicker(
+        context: context,
+        initialDate: now,
+        firstDate: DateTime(now.year - 1, 4, 1),
+        lastDate: now);
+    setState(() {
+      _selectedDate = selectedDate;
+    });
+  }
 
   @override
   void dispose() {
@@ -29,13 +43,40 @@ class _AddExpenses extends State<AddExpenses> {
             label: Text("Title"),
           ),
         ),
-        TextField(
-          controller: _amountController,
-          keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
-            prefixText: "Rs.",
-            label: Text("Amount"),
-          ),
+        Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: _amountController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  prefixText: "Rs.",
+                  label: Text("Amount"),
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 16,
+            ),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(_selectedDate != null
+                      ? dateFormat.format(_selectedDate!)
+                      : "Date not selected!"),
+                  IconButton(
+                    onPressed: _datePicker,
+                    icon: const Icon(Icons.calendar_month),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+        const SizedBox(
+          height: 16,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
