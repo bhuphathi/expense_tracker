@@ -1,6 +1,8 @@
-import 'package:expense_tracker/model/expense.dart';
-import 'package:expense_tracker/screens/helper_widgets/expenses_list.dart';
 import 'package:flutter/material.dart';
+
+import 'package:expense_tracker/model/expense.dart';
+import 'package:expense_tracker/screens/helper_widgets/add_expenses.dart';
+import 'package:expense_tracker/screens/helper_widgets/expenses_list.dart';
 
 class ExpensesScreen extends StatefulWidget {
   const ExpensesScreen({super.key});
@@ -25,6 +27,13 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     ),
   ];
 
+  void addExpenses() {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => const AddExpenses(),
+    );
+  }
+
   @override
   Widget build(context) {
     return Scaffold(
@@ -32,7 +41,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
         title: const Text("Expense tracker"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: addExpenses,
             icon: const Icon(Icons.add),
           ),
         ],
