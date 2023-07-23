@@ -32,7 +32,6 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       setState(() {
         _registeredExpenses.add(exp);
       });
-      Navigator.pop(context);
     }
 
     showModalBottomSheet(
