@@ -70,8 +70,12 @@ class _AddExpenses extends State<AddExpenses> {
 
   @override
   Widget build(context) {
+    final double statusBarHeight = View.of(context).viewPadding.top / 3.5;
+    // print("statusBarHeight: $statusBarHeight");
+    // print("devicePixelRatio: ${View.of(context).devicePixelRatio}");
+
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.fromLTRB(16, statusBarHeight, 16, 16),
       child: Column(children: [
         TextField(
           controller: _titleController,
