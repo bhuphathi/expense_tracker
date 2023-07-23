@@ -2,7 +2,9 @@ import 'package:expense_tracker/model/expense.dart';
 import 'package:flutter/material.dart';
 
 class AddExpenses extends StatefulWidget {
-  const AddExpenses({super.key});
+  const AddExpenses({super.key, required this.addExpenseToDB});
+
+  final void Function(Expense expense) addExpenseToDB;
 
   @override
   State<AddExpenses> createState() => _AddExpenses();
@@ -24,6 +26,37 @@ class _AddExpenses extends State<AddExpenses> {
     setState(() {
       _selectedDate = selectedDate;
     });
+  }
+
+  void _submitExpense() {
+    final amount = double.tryParse(_amountController.text);
+    final isAmountNotValid = amount == null || amount <= 0;
+
+    if (isAmountNotValid ||
+        _selectedDate == null ||
+        _titleController.text.trim().isEmpty) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title:
+              const Text("Invalid Input!", style: TextStyle(color: Colors.red)),
+          content: const Text("Invalid input please check!"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(ctx);
+              },
+              child: const Text("Ok"),
+            ),
+          ],
+        ),
+      );
+    }
+    widget.addExpenseToDB(Expense(
+        amount: amount!,
+        category: _selectedCategory,
+        date: _selectedDate!,
+        title: _titleController.text));
   }
 
   @override
@@ -80,7 +113,6 @@ class _AddExpenses extends State<AddExpenses> {
           height: 16,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             DropdownButton(
               value: _selectedCategory,
@@ -99,9 +131,7 @@ class _AddExpenses extends State<AddExpenses> {
                 });
               },
             ),
-            const SizedBox(
-              width: 16,
-            ),
+            const Spacer(),
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -109,10 +139,7 @@ class _AddExpenses extends State<AddExpenses> {
               child: const Text("Cancel"),
             ),
             ElevatedButton(
-              onPressed: () {
-                print(_titleController);
-                print(_amountController);
-              },
+              onPressed: _submitExpense,
               child: const Text("Save Changes"),
             ),
           ],

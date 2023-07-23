@@ -28,9 +28,16 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   ];
 
   void addExpenses() {
+    void expense(Expense exp) {
+      setState(() {
+        _registeredExpenses.add(exp);
+      });
+      Navigator.pop(context);
+    }
+
     showModalBottomSheet(
       context: context,
-      builder: (ctx) => const AddExpenses(),
+      builder: (ctx) => AddExpenses(addExpenseToDB: expense),
     );
   }
 
