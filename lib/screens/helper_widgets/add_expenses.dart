@@ -29,8 +29,8 @@ class _AddExpenses extends State<AddExpenses> {
   }
 
   void _submitExpense() {
-    final amount = double.tryParse(_amountController.text);
-    final isAmountNotValid = amount == null || amount <= 0;
+    final enteredAmount = double.tryParse(_amountController.text);
+    final isAmountNotValid = enteredAmount == null || enteredAmount <= 0;
 
     if (isAmountNotValid ||
         _selectedDate == null ||
@@ -54,7 +54,7 @@ class _AddExpenses extends State<AddExpenses> {
       return;
     }
     widget.addExpenseToDB(Expense(
-        amount: amount!,
+        amount: enteredAmount,
         category: _selectedCategory,
         date: _selectedDate!,
         title: _titleController.text));
