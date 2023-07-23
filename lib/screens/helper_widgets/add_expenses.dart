@@ -51,6 +51,7 @@ class _AddExpenses extends State<AddExpenses> {
           ],
         ),
       );
+      return;
     }
     widget.addExpenseToDB(Expense(
         amount: amount!,
