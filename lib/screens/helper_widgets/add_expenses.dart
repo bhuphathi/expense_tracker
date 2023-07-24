@@ -13,7 +13,7 @@ class AddExpenses extends StatefulWidget {
 class _AddExpenses extends State<AddExpenses> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
-  DateTime? _selectedDate;
+  DateTime? _selectedDate = DateTime.now();
   Category _selectedCategory = Category.food;
 
   _datePicker() async {
