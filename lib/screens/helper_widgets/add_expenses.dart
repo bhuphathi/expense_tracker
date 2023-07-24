@@ -70,7 +70,8 @@ class _AddExpenses extends State<AddExpenses> {
 
   @override
   Widget build(context) {
-    final double statusBarHeight = View.of(context).viewPadding.top / 3.5;
+    final double statusBarHeight =
+        View.of(context).viewPadding.top / View.of(context).devicePixelRatio;
     // print("statusBarHeight: $statusBarHeight");
     // print("devicePixelRatio: ${View.of(context).devicePixelRatio}");
 
