@@ -1,3 +1,4 @@
+import 'package:expense_tracker/main.dart';
 import 'package:flutter/material.dart';
 
 import 'package:expense_tracker/model/expense.dart';
@@ -5,7 +6,11 @@ import 'package:expense_tracker/screens/helper_widgets/add_expenses.dart';
 import 'package:expense_tracker/screens/helper_widgets/expenses_list.dart';
 
 class ExpensesScreen extends StatefulWidget {
-  const ExpensesScreen({super.key});
+  const ExpensesScreen(
+      {super.key, required this.toggleTheme, required this.themeMode});
+
+  final void Function() toggleTheme;
+  final CurrentThemeMode themeMode;
 
   @override
   State<ExpensesScreen> createState() => _ExpensesScreenState();
@@ -81,9 +86,21 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       appBar: AppBar(
         title: const Text("Expense tracker"),
         actions: [
-          IconButton(
-            onPressed: addExpenses,
-            icon: const Icon(Icons.add),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 8),
+            child: IconButton(
+              onPressed: addExpenses,
+              icon: const Icon(Icons.add),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(right: 8),
+            child: IconButton(
+              onPressed: widget.toggleTheme,
+              icon: widget.themeMode == CurrentThemeMode.dark
+                  ? const Icon(Icons.wb_sunny_outlined)
+                  : const Icon(Icons.nights_stay_outlined),
+            ),
           ),
         ],
       ),
