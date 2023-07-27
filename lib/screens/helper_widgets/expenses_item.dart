@@ -10,26 +10,26 @@ class ExpensesItem extends StatelessWidget {
   Widget build(context) {
     return Card(
         borderOnForeground: true,
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 30,
-            ),
-            Text(expense.title),
-            Row(
-              children: [
-                Text("Rs.${expense.amount.toStringAsFixed(2)}"),
-                const Spacer(),
-                Row(
-                  children: [
-                    Icon(categoryIcons[expense.category]),
-                    const SizedBox(width: 8),
-                    Text(expense.formattedDate),
-                  ],
-                ),
-              ],
-            )
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          child: Column(
+            children: [
+              Text(expense.title),
+              Row(
+                children: [
+                  Text("Rs.${expense.amount.toStringAsFixed(2)}"),
+                  const Spacer(),
+                  Row(
+                    children: [
+                      Icon(categoryIcons[expense.category]),
+                      const SizedBox(width: 8),
+                      Text(expense.formattedDate),
+                    ],
+                  ),
+                ],
+              )
+            ],
+          ),
         ));
   }
 }
