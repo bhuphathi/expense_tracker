@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:expense_tracker/screens/expenses_screen.dart';
+// import 'package:flutter/services.dart';
 
 final lightColorScheme = ColorScheme.fromSeed(seedColor: Colors.deepPurple);
 final darkColorScheme = ColorScheme.fromSeed(
@@ -11,6 +12,12 @@ final darkColorScheme = ColorScheme.fromSeed(
 enum CurrentThemeMode { light, dark }
 
 void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  // ]).then(
+  //   (fn) => runApp(const App()),
+  // );
   runApp(const App());
 }
 
@@ -62,6 +69,13 @@ class _AppState extends State<App> {
           style: IconButton.styleFrom(
             backgroundColor: colorScheme.primary,
             foregroundColor: colorScheme.primaryContainer,
+          ),
+        ),
+        textTheme: const TextTheme().copyWith(
+          titleLarge: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            color: colorScheme.error.withAlpha(150),
           ),
         ),
       ),
