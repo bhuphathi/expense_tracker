@@ -35,9 +35,10 @@ class Chart extends StatelessWidget {
     final isDarkMode =
         MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Container(
-      margin: const EdgeInsets.all(10),
+      //list card margin specified in main.dart theme setting
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       padding: const EdgeInsets.symmetric(
-        vertical: 16,
+        vertical: 10,
         horizontal: 4,
       ),
       width: double.infinity,
@@ -47,7 +48,7 @@ class Chart extends StatelessWidget {
         gradient: LinearGradient(
           colors: [
             Theme.of(context).colorScheme.primary.withOpacity(0.3),
-            Theme.of(context).colorScheme.primary.withOpacity(0.0)
+            Theme.of(context).colorScheme.primary.withOpacity(0.1)
           ],
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,

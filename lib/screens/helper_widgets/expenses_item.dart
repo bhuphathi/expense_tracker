@@ -8,6 +8,7 @@ class ExpensesItem extends StatelessWidget {
 
   @override
   Widget build(context) {
+    //list card margin specified in main.dart theme setting
     return Card(
         borderOnForeground: true,
         child: Padding(

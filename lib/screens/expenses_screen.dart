@@ -72,6 +72,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 
   @override
   Widget build(context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     Widget mainContent = const Center(
       child: Text("No expenses found, start adding some..."),
     );
@@ -105,17 +106,29 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          const Text(
-            "The Expenses Widget...",
-          ),
-          Chart(expenses: _registeredExpenses),
-          Expanded(
-            child: mainContent,
-          ),
-        ],
-      ),
+      body: screenWidth < 500
+          ? Column(
+              children: [
+                const Text(
+                  "The Expenses Widget...",
+                ),
+                Chart(expenses: _registeredExpenses),
+                Expanded(
+                  child: mainContent,
+                ),
+              ],
+            )
+          : Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: mainContent,
+                ),
+                Expanded(
+                  child: Chart(expenses: _registeredExpenses),
+                ),
+              ],
+            ),
     );
   }
 }
