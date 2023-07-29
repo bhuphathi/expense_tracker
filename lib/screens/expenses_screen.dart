@@ -107,7 +107,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
           ),
         ],
       ),
-      body: screenWidth < 500
+      body: screenWidth <= 500
           ? Column(
               children: [
                 const Text(
